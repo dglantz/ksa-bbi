@@ -44,8 +44,8 @@ jobs:
       # - name: create lock file
       #   run: npm install --package-lock-only
 
-      - name: Clean
-        run: npm clean
+      # - name: Clean
+      #   run: npm clean
 
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
