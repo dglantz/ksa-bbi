@@ -29,6 +29,11 @@ jobs:
           path: target/*.jar
 
   release:
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
     needs: build
     runs-on: ubuntu-latest
 
@@ -42,7 +47,7 @@ jobs:
           node-version: 'lts/*'
 
       # - name: create lock file
-      #   run: npm install --package-lock-only
+      #   run: npm install @semantic-release/github -D
 
       # - name: Clean
       #   run: npm clean
@@ -52,7 +57,7 @@ jobs:
       
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
