@@ -41,6 +41,9 @@ jobs:
         with:
           node-version: 'lts/*'
 
+      - name: create lock file
+        run: npm install --package-lock-only
+
       - name: Install dependencies
         run: npm clean-install
 
